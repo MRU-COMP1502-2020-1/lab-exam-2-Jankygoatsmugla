@@ -1,9 +1,6 @@
 package lsystems;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LLine {
 
@@ -67,15 +64,29 @@ public class LLine {
 	}
 
 	private boolean invalidChars() {
-//		for(LRule rule : this.rules) {
-//			for (char c : line) {
-//				if (rule.getMatch() != c) {
-//					return false;
-//				}
-//			}
-//		}
-		//todo
-		return false;
+		Set<LRule> rules = getRules();
+
+		for(LRule r : rules) {
+			for (char c : line) {
+				if (r.getMatch() != c) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	private Set<LRule> getRules() {
+		Set<LRule> rules = new HashSet<LRule>();
+		rules.add(new A_A());
+		rules.add(new A_AA());
+		rules.add(new A_BC());
+		rules.add(new A_Q());
+		rules.add(new A_X());
+		rules.add(new B_A());
+		rules.add(new C_B());
+		return rules;
 	}
 
 
